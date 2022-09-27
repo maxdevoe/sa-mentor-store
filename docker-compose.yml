@@ -7,7 +7,7 @@ services:
     volumes:
     - devmysqldb:/var/lib/mysql
 
-  web: 
+  app: 
     build: app 
     depends_on:
       - db

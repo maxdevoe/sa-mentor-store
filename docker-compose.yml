@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   db:
     image: mariadb:10.5.8
@@ -7,15 +9,13 @@ services:
     volumes:
     - devmysqldb:/var/lib/mysql
 
-  app: 
+  service: 
     build: app 
     depends_on:
       - db
-    restart: always
     volumes:
       - ./app:/app
     stdin_open: true # enable attach for pdb
-    tty: true
     ports: 
       - '5000:5000'
 volumes:

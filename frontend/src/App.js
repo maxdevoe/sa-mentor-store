@@ -10,7 +10,7 @@ const Product = (props) => {
           <div>
             <p>{product.description}</p>
             <p>{product.id}</p>
-            <p>{product.image_link}</p>
+            <img src={product.image_link} />
             <p>{product.link}</p>
             <p>{product.price}</p>
             <p>{product.sku}</p>

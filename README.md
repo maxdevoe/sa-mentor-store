@@ -7,6 +7,7 @@ The purpose of this repo is to create a fullstack web application of a fake ecom
 2. build local docker containers - `docker-compose build`
 3. run local containers - `docker-compose up backend frontend`
     - This will spin up both containers and keep them running
+4. load `http://localhost:8090` in your browser
 
 
 ### See sub directories for flask/react info

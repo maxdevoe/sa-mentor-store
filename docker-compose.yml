@@ -9,14 +9,26 @@ services:
     volumes:
     - devmysqldb:/var/lib/mysql
 
-  service: 
-    build: app 
+  backend: 
+    build: backend 
     depends_on:
       - db
+    restart: always
     volumes:
-      - ./app:/app
+      - ./backend:/app
     stdin_open: true # enable attach for pdb
     ports: 
-      - '5000:5000'
+      - '8000:80'
+  
+  frontend:
+    build: frontend
+    restart: always
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/frontend
+    ports:
+      - "8090:80"
+
 volumes:
   devmysqldb:

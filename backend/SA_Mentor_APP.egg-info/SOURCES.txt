@@ -1,0 +1,5 @@
+setup.py
+SA_Mentor_APP.egg-info/PKG-INFO
+SA_Mentor_APP.egg-info/SOURCES.txt
+SA_Mentor_APP.egg-info/dependency_links.txt
+SA_Mentor_APP.egg-info/top_level.txt

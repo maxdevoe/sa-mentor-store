@@ -7,19 +7,19 @@ services:
       - MYSQL_ROOT_PASSWORD=testpass
       - MYSQL_DATABASE=default
     volumes:
-    - devmysqldb:/var/lib/mysql
+      - devmysqldb:/var/lib/mysql
 
-  backend: 
-    build: backend 
+  backend:
+    build: backend
     depends_on:
       - db
     restart: always
     volumes:
       - ./backend:/app
     stdin_open: true # enable attach for pdb
-    ports: 
+    ports:
       - '8000:80'
-  
+
   frontend:
     build: frontend
     restart: always

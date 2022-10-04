@@ -8,13 +8,13 @@ const Product = (props) => {
       {props.products.map((product) => {
         return (
           <div>
-            <p>{product.description}</p>
-            <p>{product.id}</p>
+            <p class="description">{product.description}</p>
+            <p class="productId">{product.id}</p>
             <img src={product.image_link} />
-            <p>{product.link}</p>
-            <p>{product.price}</p>
-            <p>{product.sku}</p>
-            <p>{product.title}</p>
+            <p class="productLink">{product.link}</p>
+            <p class="price">${product.price}</p>
+            <p class="sku">{product.sku}</p>
+            <p class="title">{product.title}</p>
           </div>
         )
       })}
@@ -37,7 +37,7 @@ const App = () => {
     }
   };
 
-  useEffect(() => {getCatalog()}, [])
+  useEffect(() => { getCatalog() }, [])
 
   return (
     <div>

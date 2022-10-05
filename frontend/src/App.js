@@ -9,12 +9,14 @@ const Product = (props) => {
         return (
           <div>
             <p class="description">{product.description}</p>
-            <p class="productId">{product.id}</p>
-            <img src={product.image_link} />
-            <p class="productLink">{product.link}</p>
-            <p class="price">${product.price}</p>
-            <p class="sku">{product.sku}</p>
             <p class="title">{product.title}</p>
+            <p class="productId">#{product.id}</p>
+            <img src={product.image_link} />
+            <p class="price">${product.price}</p>
+            <button class="productButton">
+              <p class="productLink"><a href={product.link}>Go to Product Page</a></p>
+            </button>
+            <p class="sku">{product.sku}</p>
           </div>
         )
       })}

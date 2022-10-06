@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import './App.css';
+import PlaceOrder from "./components/PlaceOrder";
 
 const Product = (props) => {
   return (
@@ -8,15 +9,16 @@ const Product = (props) => {
       {props.products.map((product) => {
         return (
           <div>
-            <p class="description">{product.description}</p>
-            <p class="title">{product.title}</p>
-            <p class="productId">#{product.id}</p>
+            <p className="description">{product.description}</p>
+            <p className="title">{product.title}</p>
+            <p className="productId">#{product.id}</p>
             <img src={product.image_link} />
-            <p class="price">${product.price}</p>
-            <button class="productButton">
-              <p class="productLink"><a href={product.link}>Go to Product Page</a></p>
+            <p className="price">${product.price}</p>
+            <button className="productButton">
+              <p className="productLink"><a href={product.link}>Go to Product Page</a></p>
             </button>
-            <p class="sku">{product.sku}</p>
+            <p className="sku">{product.sku}</p>
+            <PlaceOrder placeOrderHandler={props.handlePlaceOrder} product={product}/>
           </div>
         )
       })}
@@ -39,11 +41,21 @@ const App = () => {
     }
   };
 
+  const handlePlaceOrder = async (event) => {
+    try {
+      const response = await axios.post('/place_order', {event});
+      debugger
+    } catch (err) {
+      setError(err)
+      console.log(err)
+    }
+  }
+
   useEffect(() => { getCatalog() }, [])
 
   return (
     <div>
-      <Product products={products} />
+      <Product products={products} handlePlaceOrder={handlePlaceOrder} />
     </div>
   )
 }

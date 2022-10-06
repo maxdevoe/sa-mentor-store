@@ -43,15 +43,21 @@ const App = () => {
 
   const handlePlaceOrder = async (event) => {
     try {
+      console.log(event)
       const response = await axios.post('/place_order', {event});
-      debugger
+      console.log(response)
     } catch (err) {
       setError(err)
       console.log(err)
     }
   }
 
+  const handleOnsiteTracking = async () => {
+    return "https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=R53yng"
+  }
+
   useEffect(() => { getCatalog() }, [])
+  useEffect(() => {handleOnsiteTracking}, [])
 
   return (
     <div>

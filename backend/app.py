@@ -1,10 +1,8 @@
 from time import gmtime
 from flask import Flask, request
-from utils import _create_klaviyo_event_payload, _encode_json_dictionary
+from utils import _create_klaviyo_event_payload
 import requests
 import json
-import base64
-import calendar
 
 app = Flask(__name__)
 
@@ -26,9 +24,9 @@ def place_order():
     url = "https://a.klaviyo.com/api/track"
     headers = {
         "accept": "text/html",
-        "content-type": "application/x-www-form-urlencoded"
+        "content-type": "application/json"
     }
 
-    response = requests.post(url, data=f"data={_encode_json_dictionary(serialized_event)}", headers=headers)
+    response = requests.post(url, data=json.dumps(serialized_event), headers=headers)
     return response.text
 

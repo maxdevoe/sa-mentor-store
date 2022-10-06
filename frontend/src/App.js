@@ -5,13 +5,13 @@ import PlaceOrder from "./components/PlaceOrder";
 
 const Product = (props) => {
   return (
-    <span>
+    <span class="products">
       {props.products.map((product) => {
         return (
-          <div>
-            <p className="description">{product.description}</p>
-            <p className="title">{product.title}</p>
-            <p className="productId">#{product.id}</p>
+          <div class="productContainer">
+            <p class="description">{product.description}</p>
+            <p class="title">{product.title}</p>
+            <p class="productId">#{product.id}</p>
             <img src={product.image_link} />
             <p className="price">${product.price}</p>
             <button className="productButton">

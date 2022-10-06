@@ -4,10 +4,10 @@ import './App.css';
 
 const Product = (props) => {
   return (
-    <span>
+    <span class="products">
       {props.products.map((product) => {
         return (
-          <div>
+          <div class="productContainer">
             <p class="description">{product.description}</p>
             <p class="title">{product.title}</p>
             <p class="productId">#{product.id}</p>

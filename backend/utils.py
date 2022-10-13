@@ -1,7 +1,7 @@
 import time
 import random
 
-def _create_klaviyo_event_payload(data, event_type):
+def _create_klaviyo_track_payload(data, event_type):
     serialized_data = {
             "token": "R53yng",
             "event": event_type,
@@ -34,4 +34,11 @@ def __add_viewed_product_details(data):
         "ProductName": data["title"],
         "value": data["price"],
         "ProductUrl": data["link"]
+    }
+
+def _create_klaviyo_subscribe_payload(email):
+    return {
+        "profiles": [
+            {"email": email}
+        ]
     }

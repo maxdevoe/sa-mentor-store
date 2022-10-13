@@ -7,6 +7,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
+    # comment
     return {"hello": "world"}
 
 @app.route("/catalog", methods=['GET'])

@@ -7,7 +7,7 @@ import Subscribe from "./components/Subscribe";
 const App = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState('');
-  const [subscribe, setSubsribe] = useState('');
+  const [subscriber, setSubsriber] = useState('');
 
   const getCatalog = async () => {
     try {
@@ -46,14 +46,13 @@ const App = () => {
     }
   }
 
-  const handleSubscribe = (event) => {
-    setSubsribe(event.target.value)
+  const handleSubscriber = (event) => {
+    setSubsriber(event.target.value)
   }
 
-  const handleClickSubscribe = async () => {
-    debugger
+  const handleClickSubscriber = async () => {
     try {
-      const response = await axios.post('/subscribe', {subscribe})
+      const response = await axios.post('/subscribe', {subscriber})
       console.log(response)
     } catch (err) {
       setError(err)
@@ -66,7 +65,7 @@ const App = () => {
   return (
     <div>
       <Product products={products} handlePlaceOrder={handlePlaceOrder} handleViewProduct={handleViewProduct} />
-      <Subscribe handleSubscribe={handleSubscribe} handleClickSubscribe={handleClickSubscribe} />
+      <Subscribe handleSubscriber={handleSubscriber} handleClickSubscriber={handleClickSubscriber} />
     </div>
   )
 }

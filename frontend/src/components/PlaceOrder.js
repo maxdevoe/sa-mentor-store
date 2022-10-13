@@ -1,7 +1,9 @@
+import '../App.css'
+
 const PlaceOrder = (props) => {
     return (
         <span>
-            <button onClick={() => props.placeOrderHandler(props.product)}>Place Order</button>
+            <button className='productButton' onClick={() => props.placeOrderHandler(props.product)}>Place Order</button>
         </span>
     )
 }

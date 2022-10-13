@@ -1,4 +1,3 @@
-from time import gmtime
 from flask import Flask, request
 from utils import _create_klaviyo_event_payload
 import requests
@@ -18,8 +17,7 @@ def catalog():
 @app.route("/place_order", methods=['POST'])
 def place_order():
     event = request.json["event"]
-    serialized_event = _create_klaviyo_event_payload(event)
-
+    serialized_event = _create_klaviyo_event_payload(event, "Placed Order")
 
     url = "https://a.klaviyo.com/api/track"
     headers = {
@@ -30,3 +28,16 @@ def place_order():
     response = requests.post(url, data=json.dumps(serialized_event), headers=headers)
     return response.text
 
+@app.route("/track_viewed_product", methods=['POST'])
+def track_viewed_product():
+    event = request.json["viewedProduct"]
+    serialized_event = _create_klaviyo_event_payload(event, "Viewed Product")
+
+    url = "https://a.klaviyo.com/api/track"
+    headers = {
+        "accept": "text/html",
+        "content-type": "application/json"
+    }
+
+    response = requests.post(url, data=json.dumps(serialized_event), headers=headers)
+    return response.text

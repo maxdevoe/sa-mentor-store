@@ -1,27 +1,37 @@
 import time
 import random
 
-def _create_klaviyo_event_payload(event):
-    serialized_event = {
+def _create_klaviyo_event_payload(data, event_type):
+    serialized_data = {
             "token": "R53yng",
-            "event": "Ordered Product",
+            "event": event_type,
             "customer_properties": {
                 "$email": "john.smith@gmail.com",
                 "$first_name": "John",
                 "$last_name": "Smith",
             },
-            "properties": {
-                "$event_id": f"{random.randint(1000,9999)}_EVENT",
-                "value": event["price"],
-                "OrderId": "43251",
-                "ProductID": event["id"],
-                "SKU": event["sku"],
-                "ProductName": event["title"],
-                "ItemPrice": event["price"],
-                "ProductURL": event["link"],
-                "ImageURL": event["image_link"],
-                "Categories": event["categories"],
-            },
+            "properties": __add_placed_order_details(data) if event_type == "Placed Order" else __add_viewed_product_details(data),
             "time": int(time.time()),
         }
-    return serialized_event
+    return serialized_data
+
+def __add_placed_order_details(data):
+    return {
+        "$data_id": f"{random.randint(1000,9999)}_data",
+        "value": data["price"],
+        "OrderId": "43251",
+        "ProductID": data["id"],
+        "SKU": data["sku"],
+        "ProductName": data["title"],
+        "ItemPrice": data["price"],
+        "ProductURL": data["link"],
+        "ImageURL": data["image_link"],
+        "Categories": data["categories"],
+    }
+
+def __add_viewed_product_details(data):
+    return {
+        "ProductName": data["title"],
+        "value": data["price"],
+        "ProductUrl": data["link"]
+    }

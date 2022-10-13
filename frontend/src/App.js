@@ -1,32 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import './App.css';
-
-const Product = (props) => {
-  return (
-    <span class="products">
-      {props.products.map((product) => {
-        return (
-          <div class="productContainer">
-            <p class="description">{product.description}</p>
-            <p class="title">{product.title}</p>
-            <p class="productId">#{product.id}</p>
-            <img src={product.image_link} />
-            <p class="price">${product.price}</p>
-            <button class="productButton">
-              <p class="productLink"><a href={product.link}>Go to Product Page</a></p>
-            </button>
-            <p class="sku">{product.sku}</p>
-          </div>
-        )
-      })}
-    </span>
-  )
-}
+import Product from "./components/Product";
+import Subscribe from "./components/Subscribe";
 
 const App = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState('');
+  const [subscribe, setSubsribe] = useState('');
+
   const getCatalog = async () => {
     try {
       const response = await axios.get("/catalog");
@@ -39,11 +21,52 @@ const App = () => {
     }
   };
 
+  const handlePlaceOrder = async (event) => {
+    try {
+      const response = await axios.post('/place_order', {event});
+      console.log(response)
+    } catch (err) {
+      setError(err)
+      console.log(err)
+    }
+  }
+
+  const handleViewProduct = async (event) => {
+    try {
+      let viewedProduct = {
+        'title':event.title,
+        'link':event.link,
+        'price':event.price
+      };
+      const response = await axios.post('/track_viewed_product', {viewedProduct});
+      console.log(response)
+    } catch (err) {
+      setError(err)
+      console.log(err)
+    }
+  }
+
+  const handleSubscribe = (event) => {
+    setSubsribe(event.target.value)
+  }
+
+  const handleClickSubscribe = async () => {
+    debugger
+    try {
+      const response = await axios.post('/subscribe', {subscribe})
+      console.log(response)
+    } catch (err) {
+      setError(err)
+      console.log(err)
+    }
+  }
+
   useEffect(() => { getCatalog() }, [])
 
   return (
     <div>
-      <Product products={products} />
+      <Product products={products} handlePlaceOrder={handlePlaceOrder} handleViewProduct={handleViewProduct} />
+      <Subscribe handleSubscribe={handleSubscribe} handleClickSubscribe={handleClickSubscribe} />
     </div>
   )
 }

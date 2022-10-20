@@ -1,5 +1,12 @@
 import PlaceOrder from "./PlaceOrder";
 
+/*
+A react child component will rarely contain logic outside of the return section. The return section
+will contain css classes, other child components, and regular HTML elements that help format how the
+component is displayed on the page. 
+
+A child component will also take in the props that we passed to it from the top level component.
+*/
 const Product = (props) => {
     return (
       <span className="products">

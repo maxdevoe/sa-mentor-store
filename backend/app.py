@@ -2,7 +2,6 @@ from flask import Flask, request
 from utils import _create_klaviyo_track_payload, _create_klaviyo_subscribe_payload
 import requests
 import json
-import random
 
 app = Flask(__name__)
 
